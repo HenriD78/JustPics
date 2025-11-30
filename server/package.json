@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "author": "Henri",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "directories": {
     "test": "test"
