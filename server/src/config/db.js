@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 
 
-
 export const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGO_URI)
@@ -11,4 +10,3 @@ export const connectDB = async () => {
         process.exit(1) // Exit process with failure, code 1, 0 means success
     }
 }
-m
