@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 import { IoMoon } from "react-icons/io5";
 import { LuSun } from "react-icons/lu";
 
+
+
 const Navbar = () => {
   const { toggleColorMode , colorMode} = useColorMode();
-  
+
   return (
     <Box 
       w="100%"                // full width banner
