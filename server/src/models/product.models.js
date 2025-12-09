@@ -1,21 +1,31 @@
-import mongose from 'mongoose';
+import mongoose from 'mongoose';
 
-const productSchema = new mongose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    description: {
-        type: String,
-        required: false
-    },
-},{ 
-    timestamps: true // Automatically adds createdAt and updatedAt fields
+// Simple product schema aligned with the front-end form
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  image: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  description: {
+    type: String,
+    required: false,
+    trim: true,
+    default: "",
+  },
+}, {
+  timestamps: true, // Automatically adds createdAt and updatedAt fields
 });
 
-export const Product = mongose.model('Product', productSchema);
+export const Product = mongoose.model('Product', productSchema);
 
