@@ -147,7 +147,7 @@ const HomePage = () => {
         mb={8}
         color={useColorModeValue("blue.500", "cyan.300")}
       >
-        Current Products
+        Current Images Available
       </Heading>
 
       {products.length === 0 ? (
