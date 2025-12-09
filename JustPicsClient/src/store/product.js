@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-export const useProductStore = create((set) => ({
+export const useProductStore = create((set,get) => ({
   products: [],
   setProducts: (products) => set({products}),
   fetchProducts: async () => {
@@ -32,6 +32,7 @@ export const useProductStore = create((set) => ({
     return  {success:true, message: "Product created successfully."}
   },
   updateProduct: async (id, updates) => {
+    const current = get().products.find(p => (p._id || p.id) === id);
     if (!id) return { success: false, message: "Missing product id" };
     const res = await fetch(`/api/products/${id}`, {
       method: "PUT",
@@ -47,6 +48,7 @@ export const useProductStore = create((set) => ({
         (p._id || p.id) === id ? data.data : p
       ),
     }));
+    if (!updates.image && current?.image) updates.image = current.image;
     return { success: true, message: "Product updated." };
   },
   deleteProduct: async (id) => {
