@@ -12,11 +12,12 @@ import {
   Center,
   Spinner,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { useProductStore } from "../store/product";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onEdit, onDelete }) => {
   return (
     <Box
       bg={useColorModeValue("white", "gray.800")}
@@ -45,10 +46,22 @@ const ProductCard = ({ product }) => {
             </Text>
           )}
           <HStack spacing={2} pt={2}>
-            <Button size="sm" leftIcon={<FaEdit />} colorScheme="blue" variant="outline">
+            <Button
+              size="sm"
+              leftIcon={<FaEdit />}
+              colorScheme="blue"
+              variant="outline"
+              onClick={() => onEdit(product)}
+            >
               Edit
             </Button>
-            <Button size="sm" leftIcon={<FaTrashAlt />} colorScheme="red" variant="outline">
+            <Button
+              size="sm"
+              leftIcon={<FaTrashAlt />}
+              colorScheme="red"
+              variant="outline"
+              onClick={() => onDelete(product)}
+            >
               Delete
             </Button>
           </HStack>
@@ -59,7 +72,8 @@ const ProductCard = ({ product }) => {
 };
 
 const HomePage = () => {
-  const { products, fetchProducts } = useProductStore();
+  const toast = useToast();
+  const { products, fetchProducts, deleteProduct, updateProduct } = useProductStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -73,6 +87,40 @@ const HomePage = () => {
     };
     load();
   }, [fetchProducts]);
+
+  const handleDelete = async (product) => {
+    const id = product._id || product.id;
+    if (!window.confirm(`Delete "${product.name}" ?`)) return;
+    const res = await deleteProduct(id);
+    toast({
+      title: res.success ? "Deleted" : "Error",
+      description: res.message,
+      status: res.success ? "success" : "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
+  const handleEdit = async (product) => {
+    const id = product._id || product.id;
+    const name = window.prompt("Name:", product.name);
+    if (name === null) return;
+    const priceStr = window.prompt("Price:", product.price);
+    if (priceStr === null) return;
+    const image = window.prompt("Image URL:", product.image || "");
+    if (image === null) return;
+    const description = window.prompt("Description:", product.description || "");
+    if (description === null) return;
+    const price = Number(priceStr);
+    const res = await updateProduct(id, { name, price, image, description });
+    toast({
+      title: res.success ? "Updated" : "Error",
+      description: res.message,
+      status: res.success ? "success" : "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
 
   if (loading) {
     return (
@@ -109,7 +157,12 @@ const HomePage = () => {
       ) : (
         <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={6}>
           {products.map((product) => (
-            <ProductCard key={product._id || product.id} product={product} />
+            <ProductCard
+              key={product._id || product.id}
+              product={product}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
           ))}
         </SimpleGrid>
       )}
