@@ -6,7 +6,8 @@ const CreatePage = () => {
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: 0,
-    description: ""
+    description: "",
+    image: ""
   });
   const { createProduct } = useProductStore();
   const handleAddProduct = async() => {
