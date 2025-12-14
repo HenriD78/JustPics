@@ -1,111 +1,65 @@
 # JustPics
 
-Application web de gestion de produits/visuels : une interface React moderne (Chakra UI, Vite, Zustand) couplée à une API REST Express/MongoDB (Mongoose).
+Application web de gestion de produits/visuels : une interface React moderne (Chakra UI, Vite, Zustand) couplï¿½e ï¿½ une API REST Express/MongoDB (Mongoose).
 
 ## Sommaire
-- Aperçu
+- Aperï¿½u
 - Architecture & Stack
-- Prérequis
+- Prï¿½requis
 - Installation
 - Configuration
-- Démarrage
+- Dï¿½marrage
 - API REST
 - Structure du projet
 - Licence
 
-## Aperçu
-JustPics permet de créer, lister, mettre à jour et supprimer des produits (nom, prix, image, description) via une API Node/Express reliée à MongoDB, avec une interface responsive en React/Chakra UI.
+## Aperï¿½u
+JustPics permet de crï¿½er, lister, mettre ï¿½ jour et supprimer des produits (nom, prix, image, description) via une API Node/Express reliï¿½e ï¿½ MongoDB, avec une interface responsive en React/Chakra UI.
 
 ## Architecture & Stack
 - Front-end : React 19, Vite, Chakra UI, React Router, Zustand, React Icons.
 - Back-end : Node.js, Express, Mongoose (MongoDB Atlas ou instance locale).
 - Outils : ESLint, Vite build/preview, dotenv.
 
-## Prérequis
+## Prï¿½requis
 - Node.js 18+ et npm.
-- Accès à une base MongoDB (locale ou hébergée).
+- Accï¿½s ï¿½ une base MongoDB (locale ou hï¿½bergï¿½e).
 
 ## Installation
-1. Cloner le dépôt :
+1. Cloner le dï¿½pï¿½t :
    ```bash
    git clone <repo> && cd JustPics
    ```
-2. Dépendances API :
+2. Dï¿½pendances API :
    ```bash
    cd server
    npm install
    ```
-3. Dépendances Front :
+3. Dï¿½pendances Front :
    ```bash
    cd ../JustPicsClient
    npm install
    ```
 
-## Configuration
-Dans `server/.env`, définir vos secrets (ne pas commiter) :
-```env
-MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<db>?retryWrites=true&w=majority
-PORT=8080
-```
-
-## Démarrage
-- API (port 8080 par défaut) :
-  ```bash
-  cd server
-  node src/index.js    # ou nodemon si disponible
-  ```
-- Front (Vite, port 5173 par défaut) :
-  ```bash
-  cd JustPicsClient
-  npm run dev
-  ```
-- Build front :
-  ```bash
-  npm run build
-  ```
-- Lint front :
-  ```bash
-  npm run lint
-  ```
-
-## API REST
-Base URL : `http://localhost:8080/api/products`
-
-- `GET /` — health check.
-- `GET /api/products` — lister les produits.
-- `POST /api/products` — créer un produit.
-  ```json
-  {
-    "name": "Affiche JustPics",
-    "price": 29.9,
-    "image": "https://…/affiche.jpg",
-    "description": "Edition limitée"
-  }
-  ```
-- `PUT /api/products/:id` — mettre à jour un produit.
-- `DELETE /api/products/:id` — supprimer un produit.
-
-Réponses : `{ "success": true|false, "data"?: <ressource>, "message"?: <texte> }`.
-
 ## Structure du projet
 ```
 JustPics/
 +- JustPicsClient/        # Front-end React (Vite, Chakra UI)
-¦  +- src/
-¦  ¦  +- components/      # Navbar, UI
-¦  ¦  +- pages/           # Home, Create
-¦  ¦  +- store/           # Zustand store (produits)
-¦  +- package.json
+ï¿½  +- src/
+ï¿½  ï¿½  +- components/      # Navbar, UI
+ï¿½  ï¿½  +- pages/           # Home, Create
+ï¿½  ï¿½  +- store/           # Zustand store (produits)
+ï¿½  +- package.json
 +- server/                # API Express/Mongoose
-¦  +- src/
-¦  ¦  +- config/          # Connexion MongoDB
-¦  ¦  +- controllers/     # Logique CRUD
-¦  ¦  +- models/          # Schémas Mongoose
-¦  ¦  +- routes/          # Routes REST
-¦  +- package.json
+ï¿½  +- src/
+ï¿½  ï¿½  +- config/          # Connexion MongoDB
+ï¿½  ï¿½  +- controllers/     # Logique CRUD
+ï¿½  ï¿½  +- models/          # Schï¿½mas Mongoose
+ï¿½  ï¿½  +- routes/          # Routes REST
+ï¿½  +- package.json
 +- LICENSE                # PolyForm Noncommercial 1.0.0
 +- README.md
 ```
 
 ## Licence
-PolyForm Noncommercial 1.0.0 — usage non commercial uniquement. Veuillez consulter `LICENSE` pour les détails.
+PolyForm Noncommercial 1.0.0 ï¿½ usage non commercial uniquement. Veuillez consulter `LICENSE` pour les dï¿½tails.
