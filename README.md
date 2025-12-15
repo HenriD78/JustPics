@@ -3,7 +3,7 @@
 Application web de gestion de produits/visuels : une interface React moderne (Chakra UI, Vite, Zustand) coupl�e � une API REST Express/MongoDB (Mongoose).
 
 ## Sommaire
-- Aper�u
+- Aperçu
 - Architecture & Stack
 - Pr�requis
 - Installation
